@@ -2,9 +2,10 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Camera, MapPin, Loader2, CheckCircle2, RefreshCw, Send, Users } from "lucide-react";
+import { Camera, MapPin, Loader2, CheckCircle2, RefreshCw, Send, Users, Landmark } from "lucide-react";
 import { ScreenHeader, Card } from "@/components/ui";
 import { severidades, zonas } from "@/lib/data";
+import { predio, requiereIca } from "@/lib/ica";
 
 type Severidad = (typeof severidades)[number]["id"];
 
@@ -14,8 +15,12 @@ export default function ReportarPage() {
   const [severidad, setSeveridad] = useState<Severidad | null>(null);
   const [zona, setZona] = useState(zonas[0].id);
   const [notas, setNotas] = useState("");
+  const [registroIca, setRegistroIca] = useState(predio.registroIca);
   const [enviando, setEnviando] = useState(false);
   const [enviado, setEnviado] = useState(false);
+
+  // OCI-001: los focos severos o críticos se notifican al ICA
+  const notificaIca = requiereIca(severidad);
 
   // GPS automático simulado
   useEffect(() => {
@@ -24,7 +29,7 @@ export default function ReportarPage() {
   }, []);
 
   // Prevención de errores: solo se habilita con foto, GPS y severidad
-  const completo = foto && gps === "listo" && severidad !== null;
+  const completo = foto && gps === "listo" && severidad !== null && (!notificaIca || registroIca.trim() !== "");
 
   function enviar() {
     if (!completo) return;
@@ -63,6 +68,16 @@ export default function ReportarPage() {
               Radio de 2 km. El sistema recalculará el riesgo de la zona con este reporte.
             </p>
           </Card>
+          {notificaIca && (
+            <Link href="/ica" className="mt-3 block w-full rounded-2xl border border-info/30 bg-info-bg p-4 text-left">
+              <p className="flex items-center gap-2 text-sm font-semibold text-info">
+                <Landmark className="size-4" /> Notificación enviada al ICA
+              </p>
+              <p className="mt-1 text-xs text-ink/80">
+                Radicado <strong>ICA-NOT-2026-0087</strong> · predio {registroIca}. Ver estado →
+              </p>
+            </Link>
+          )}
           <div className="mt-6 grid w-full gap-3">
             <Link href="/mapa" className="flex h-12 items-center justify-center rounded-2xl bg-brand-600 font-bold text-white">
               Ver en el mapa
@@ -178,6 +193,35 @@ export default function ReportarPage() {
             className="mt-1 w-full rounded-xl border border-brand-200 p-3 text-sm outline-none focus:ring-4 focus:ring-brand-200"
           />
         </Card>
+
+        {/* OCI-001: notificación fitosanitaria al ICA */}
+        {notificaIca && (
+          <Card className="rise border-info/30 bg-info-bg">
+            <div className="flex items-center gap-2.5">
+              <span className="grid size-7 place-items-center rounded-full bg-info text-white">
+                <Landmark className="size-4" />
+              </span>
+              <h2 className="font-bold text-info">Notificación al ICA</h2>
+              <span className="ml-auto rounded-full bg-white px-2 py-0.5 text-[10px] font-bold text-info">AUTOMÁTICA</span>
+            </div>
+            <p className="mt-2 text-xs leading-snug text-ink/80">
+              Por ser un foco {severidad === "critica" ? "crítico" : "severo"}, este reporte se enviará también al
+              ICA como notificación fitosanitaria oficial.
+            </p>
+            <label className="mt-3 block text-xs font-semibold text-muted" htmlFor="registro-ica">
+              Registro ICA del predio
+            </label>
+            <input
+              id="registro-ica"
+              value={registroIca}
+              onChange={(e) => setRegistroIca(e.target.value)}
+              className="mt-1 h-12 w-full rounded-xl border border-info/30 bg-white px-3 text-sm font-semibold outline-none focus:ring-4 focus:ring-info/20"
+            />
+            {registroIca.trim() === "" && (
+              <p className="mt-1 text-xs text-risk-high">El registro ICA es obligatorio para notificar.</p>
+            )}
+          </Card>
+        )}
 
         {!completo && (
           <p className="text-center text-xs text-muted">

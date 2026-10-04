@@ -55,3 +55,14 @@ interfaz: no hay backend ni datos reales.
 - Prototipo de **solo frontend**: sin backend, base de datos, autenticación real ni servicios externos.
 - La foto, el GPS, el clima y el mapa son **simulaciones** visuales.
 - Los nombres de personas y fincas son ficticios.
+
+## Requisitos añadidos por la OCI-001 (v1.1.0)
+
+| ID | Tipo | Requisito | Pantalla |
+|---|---|---|---|
+| RF-21 | Funcional | Al registrar un foco *Severo* o *Crítico*, el sistema debe generar automáticamente una notificación fitosanitaria al ICA. | `/reportar` |
+| RF-22 | Funcional | El sistema debe precargar el registro ICA del predio y exigirlo para enviar la notificación. | `/reportar` |
+| RF-23 | Funcional | El sistema debe mostrar el número de radicado ICA en la confirmación del reporte. | `/reportar` |
+| RF-24 | Funcional | El sistema debe listar las notificaciones ICA con estado (Pendiente, Enviada, Confirmada) y permitir reenviar las pendientes. | `/ica` |
+| RNF-16 | No funcional (disponibilidad) | Si el servicio del ICA no responde, la notificación debe quedar en cola y reintentarse sin perder datos. | `/ica` |
+| RNF-17 | No funcional (privacidad) | Solo se envían al ICA los datos necesarios del predio y del foco (Ley 1581 de 2012). | — |

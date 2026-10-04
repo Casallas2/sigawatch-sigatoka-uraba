@@ -83,7 +83,7 @@ export type Alerta = {
   zona: string;
   hace: string;
   leida: boolean;
-  icono: "brote" | "clima" | "progreso" | "ok";
+  icono: "brote" | "clima" | "progreso" | "ok" | "ica";
 };
 
 export const alertasIniciales: Alerta[] = [
@@ -108,6 +108,17 @@ export const alertasIniciales: Alerta[] = [
     hace: "hace 5 horas",
     leida: false,
     icono: "clima",
+  },
+  {
+    id: "a5",
+    titulo: "ICA confirmó la notificación",
+    detalle:
+      "Radicado ICA-NOT-2026-0081 del foco FOC-0131 recibido por la autoridad fitosanitaria.",
+    nivel: "info",
+    zona: "Zona Sur",
+    hace: "hace 6 horas",
+    leida: true,
+    icono: "ica",
   },
   {
     id: "a3",

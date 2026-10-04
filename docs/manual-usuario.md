@@ -14,5 +14,7 @@ Dirigido a agricultores y técnicos de campo de fincas bananeras de Urabá.
    recomendaciones.
 5. **Ver el mapa.** En *Mapa* filtras los focos por nivel de riesgo y tocas cada punto para ver el detalle.
 6. **Atender alertas.** En *Alertas* filtras por activas o leídas; toca una alerta para marcarla como leída.
+7. **Notificaciones ICA (v1.1.0).** Si reportas un foco Severo o Crítico, la app lo notifica al ICA
+   automáticamente. En el panel toca *Notificaciones ICA* para ver el radicado y reenviar las pendientes.
 
 Colores: **rojo** = riesgo alto, **naranja** = medio, **verde** = bajo.

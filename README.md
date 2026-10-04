@@ -8,6 +8,7 @@ Prototipo navegable (solo frontend) del sistema **SigaWatch**, desarrollado para
 | **Estudiante / Líder de Configuración** | Sebastián Gil Villalobos |
 | **Docente** | Marta Lucía Jiménez Torres |
 | **Versión de línea base** | `v1.0.0` (Parcial I — UI/UX y Scrum) |
+| **Versión actual** | `v1.1.0` — OCI-001 Notificación fitosanitaria al ICA (Parcial II) |
 | **Despliegue** | Vercel (producción = rama `main`, vista previa = cada rama/PR) |
 
 > **Importante:** es una demostración de interfaz. No hay backend, base de datos ni integraciones reales;
@@ -30,6 +31,7 @@ automáticamente a las fincas cercanas.
 | 4 | `/riesgo` | Análisis de riesgo | HU-02 Ver riesgo · HU-03 Analizar clima |
 | 5 | `/mapa` | Mapa de focos | HU-05 Ver focos cercanos en mapa |
 | 6 | `/alertas` | Alertas | HU-04 Recibir alertas automáticas |
+| 7 | `/ica` | Notificaciones ICA (v1.1.0) | HU-07 Notificar focos al ICA — **OCI-001** |
 
 ## Catálogo de Elementos de Configuración de Software (ECS)
 
@@ -48,6 +50,7 @@ Un cambio a cualquier ECS exige una **Solicitud de Cambio** (Issue) y un **Pull 
 | ECS-P-06 | Vista Alertas | `app/(app)/alertas/page.tsx` | Notificaciones — patrón *Observer* |
 | ECS-P-07 | Componentes compartidos | `components/` | Marco, navegación, encabezados, mapa |
 | ECS-P-08 | Configuración de build | `package.json`, `next.config.ts`, `tsconfig.json` | Dependencias y compilación |
+| ECS-P-10 | Vista Notificaciones ICA | `app/(app)/ica/page.tsx` | Estado y radicados de notificaciones al ICA (OCI-001) |
 | ECS-P-09 | Ejecutable desplegado | Vercel (build de `main`) | Artefacto generado por `next build` |
 
 ### 2. Datos
@@ -59,6 +62,7 @@ Un cambio a cualquier ECS exige una **Solicitud de Cambio** (Issue) y un **Pull 
 | ECS-D-03 | API de clima (externa, futura) | Servicio meteorológico (p. ej. IDEAM) | Humedad, lluvia, viento |
 | ECS-D-04 | GPS del dispositivo | Sensor del teléfono | Coordenadas del foco |
 | ECS-D-05 | Base de datos de focos (futura) | PostgreSQL + PostGIS | Persistencia georreferenciada |
+| ECS-D-06 | Integración ICA (simulada) | `lib/ica.ts` → servicio externo del ICA | Registro ICA del predio y radicados (OCI-001) |
 
 ### 3. Documentación
 
@@ -73,6 +77,8 @@ Un cambio a cualquier ECS exige una **Solicitud de Cambio** (Issue) y un **Pull 
 | ECS-DOC-07 | Plantillas de control de cambios | `.github/ISSUE_TEMPLATE/`, `.github/PULL_REQUEST_TEMPLATE.md` |
 | ECS-DOC-08 | Infraestructura como código | `infra/main.tf` |
 | ECS-DOC-09 | Requisitos funcionales y no funcionales | `docs/requisitos.md` |
+| ECS-DOC-10 | Orden de Cambio de Ingeniería 001 | `docs/gcs/OCI-001.md` |
+| ECS-DOC-11 | Auditoría e informe de estado de la OCI-001 | `docs/gcs/auditoria-OCI-001.md` |
 
 ## Estrategia de ramas (GitFlow simplificado)
 
