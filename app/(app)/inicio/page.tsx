@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { MapPin, Siren, ChevronRight, LayoutGrid, AlertTriangle, ClipboardList, CloudRain } from "lucide-react";
+import { MapPin, Siren, ChevronRight, LayoutGrid, AlertTriangle, ClipboardList, CloudRain, Landmark } from "lucide-react";
 import { StatusBar, SectionTitle, Card } from "@/components/ui";
 import { MiniMap } from "@/components/mini-map";
 import { zonas, riesgoLabel, riesgoStyles, clima } from "@/lib/data";
@@ -64,6 +64,16 @@ export default function InicioPage() {
           <p className="flex-1 text-[13px]">
             <strong>{clima.humedad}% humedad</strong> · {clima.temperatura} °C · lluvia {clima.precipitacion} mm
           </p>
+          <ChevronRight className="size-4 text-muted" />
+        </Link>
+
+        {/* OCI-001: estado de las notificaciones al ICA */}
+        <Link href="/ica" className="mt-3 flex items-center gap-3 rounded-2xl border border-info/30 bg-info-bg p-3.5">
+          <Landmark className="size-6 text-info" />
+          <p className="flex-1 text-[13px]">
+            <strong className="text-info">Notificaciones ICA</strong> · 1 pendiente de envío
+          </p>
+          <span className="rounded-full bg-info px-2 py-0.5 text-[10px] font-bold text-white">NUEVO</span>
           <ChevronRight className="size-4 text-muted" />
         </Link>
 

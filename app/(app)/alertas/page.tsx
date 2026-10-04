@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { MapPin, Siren, CloudRain, TrendingUp, CheckSquare } from "lucide-react";
+import { MapPin, Siren, CloudRain, TrendingUp, CheckSquare, Landmark } from "lucide-react";
 import { ScreenHeader } from "@/components/ui";
 import { alertasIniciales, type Alerta, type NivelAlerta } from "@/lib/data";
 
@@ -16,6 +16,7 @@ const iconos: Record<Alerta["icono"], React.ReactNode> = {
   clima: <CloudRain className="size-5 text-info" />,
   progreso: <TrendingUp className="size-5 text-risk-mid" />,
   ok: <CheckSquare className="size-5 text-risk-low" />,
+  ica: <Landmark className="size-5 text-info" />,
 };
 
 type Filtro = "todos" | "activos" | "leidos";
