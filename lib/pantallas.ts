@@ -7,4 +7,5 @@ export const pantallas: Pantalla[] = [
   { href: "/riesgo", nombre: "4. Análisis de riesgo" },
   { href: "/mapa", nombre: "5. Mapa de focos" },
   { href: "/alertas", nombre: "6. Alertas" },
+  { href: "/ica", nombre: "7. Notificaciones ICA", etiqueta: "OCI-001" },
 ];
