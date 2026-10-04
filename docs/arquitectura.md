@@ -40,3 +40,21 @@ Auth   Registro de    Análisis de      Alertas          Clima (adaptador
 - `app/` — una carpeta por vista (ECS-P-01 a ECS-P-06).
 - `components/` — componentes reutilizables (ECS-P-07).
 - `lib/data.ts` — datos simulados que reemplazan las respuestas de los servicios (ECS-D-01).
+
+## Cambio v1.1.0 — OCI-001: Integración ICA
+
+```
+RegistroFoco (sujeto) ──notifica──► FincasVecinas      (observador existente)
+                      ├──────────► PanelRiesgo         (observador existente)
+                      └──────────► NotificadorICA      (NUEVO observador, solo severidad ≥ Severa)
+                                        │
+                                        ▼
+                               Servicio Integración ICA (NUEVO microservicio / adaptador)
+                                        │  cola de reintentos
+                                        ▼
+                               Servicio externo del ICA
+```
+
+- El sujeto `RegistroFoco` **no se modifica**: solo se suscribe un nuevo observador (principio abierto/cerrado).
+- El adaptador aísla el formato del ICA; si cambia su servicio, solo cambia el adaptador.
+- Servicios sin impacto: Autenticación, Análisis de riesgo (Strategy) y Clima.
